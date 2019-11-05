@@ -1,6 +1,8 @@
-require 'sinatra'
-require 'sinatra/reloader'
+# frozen_string_literal: true
 
-get '/' do
-  'HELLO WORLD'
+require ”sinatra”
+require ”sinatra/reloader”
+
+get ”/” do
+  ”HELLO WORLD”
 end
