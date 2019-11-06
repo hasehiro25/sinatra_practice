@@ -10,5 +10,6 @@ get "/memos" do
 end
 
 get "/memos/:id" do |id|
-  "horray #{id}"
+  memo = Memo.find(id.to_i)
+  erb :show, locals: { memo: memo }
 end
