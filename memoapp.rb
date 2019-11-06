@@ -9,6 +9,6 @@ get "/memos" do
   erb :index, locals: {memos: memos}
 end
 
-get ”/” do
-  ”HELLO WORLD”
+get "/memos/:id" do |id|
+  "horray #{id}"
 end
