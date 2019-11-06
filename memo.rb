@@ -5,7 +5,7 @@ require './record_manager'
 class Memo
   attr_accessor :id, :text
 
-  def initialize(id, text)
+  def initialize(id: nil, text:)
     @id = id
     @text = text
   end
@@ -18,14 +18,18 @@ class Memo
     memos.find { |memo| memo.id == id }
   end
 
+  def save
+    RecordManager.save(RecordManager.new_id, self.text)
+  end
+
   def title
     @text.split("\n").first
   end
 
   private
     def self.memos
-      @memos ||= RecordManager.fetch_data.map do |memo|
-        Memo.new(memo["id"].to_i, memo["text"])
+      RecordManager.fetch_data.map do |memo|
+        Memo.new(id: memo["id"].to_i, text: memo["text"])
       end
     end
 end

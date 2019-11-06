@@ -9,7 +9,17 @@ get "/memos" do
   erb :index, locals: {memos: memos}
 end
 
+get "/memos/new" do
+  erb :new
+end
+
 get "/memos/:id" do |id|
   memo = Memo.find(id.to_i)
   erb :show, locals: { memo: memo }
+end
+
+post "/memos" do
+  text = Memo.new(text: params["text"])
+  text.save
+  redirect to "/memos"
 end
