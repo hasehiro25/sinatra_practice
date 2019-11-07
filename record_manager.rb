@@ -11,8 +11,12 @@ class RecordManager
     end
   end
 
+  def self.find(id)
+    fetch_data.find{ |hash| hash["id"].to_i == id}
+  end
+
   def self.new_id
-    fetch_data.max_by { |val| val["id"].to_i }["id"].to_i + 1
+    fetch_data.max_by{ |val| val["id"].to_i }["id"].to_i + 1
   end
 
   def self.save(id, text)

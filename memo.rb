@@ -15,7 +15,8 @@ class Memo
   end
 
   def self.find(id)
-    memos.find { |memo| memo.id == id }
+    record = RecordManager.find(id)
+    Memo.new(id: record["id"], text: record["text"])
   end
 
   def save
