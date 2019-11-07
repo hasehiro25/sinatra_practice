@@ -23,3 +23,8 @@ post "/memos" do
   text.save
   redirect to "/memos"
 end
+
+get "/memos/:id/edit" do |id|
+  memo = Memo.find(id.to_i)
+  erb :edit, locals: {memo: memo}
+end
