@@ -11,7 +11,9 @@ class Memo
   end
 
   def self.all
-    memos
+    RecordManager.fetch_data.map do |memo|
+      Memo.new(id: memo["id"].to_i, text: memo["text"])
+    end
   end
 
   def self.find(id)
@@ -28,9 +30,4 @@ class Memo
   end
 
   private
-    def self.memos
-      RecordManager.fetch_data.map do |memo|
-        Memo.new(id: memo["id"].to_i, text: memo["text"])
-      end
-    end
 end
