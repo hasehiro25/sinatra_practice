@@ -19,11 +19,9 @@ class RecordManager
     fetch_data.max_by{ |val| val["id"].to_i }["id"].to_i + 1
   end
 
-  def self.save(id, text)
+  def self.save(**args)
     arr = fetch_data
-    new_data = { id: id, text: text}
-    arr << new_data
-    p arr
+    arr << args
 
     File.open(PATH, 'w') do |io|
       JSON.dump(arr, io)

@@ -22,7 +22,7 @@ class Memo
   end
 
   def save
-    RecordManager.save(RecordManager.new_id, self.text)
+    RecordManager.save(id: RecordManager.new_id, text: self.text)
   end
 
   def title
