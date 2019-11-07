@@ -20,6 +20,7 @@ class RecordManager
   end
 
   def self.save(**args)
+    args[:id] = new_id if args[:id].nil?
     arr = fetch_data
     arr << args
 
