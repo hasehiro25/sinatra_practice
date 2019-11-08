@@ -25,6 +25,10 @@ class Memo
     RecordManager.save(id: self.id, text: self.text)
   end
 
+  def update
+    RecordManager.update(id: self.id, text: self.text)
+  end
+
   def title
     @text.split("\n").first
   end

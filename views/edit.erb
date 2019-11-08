@@ -1,5 +1,6 @@
 <h1>編集</h1>
-<form method="memo/:id"action="put">
-  <textarea><%= memo.text %></textarea>
+<form method="post"action="/memos/<%= memo.id %>">
+  <input type="hidden" name="_method" value="put" >
+  <textarea name="text"><%= memo.text %></textarea>
   <input type="submit">
 </form>

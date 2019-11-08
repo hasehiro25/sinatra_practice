@@ -4,6 +4,8 @@ require "sinatra"
 require "sinatra/reloader"
 require "./memo"
 
+enable :method_override
+
 get "/memos" do
   memos = Memo.all
   erb :index, locals: {memos: memos}
@@ -27,4 +29,10 @@ end
 get "/memos/:id/edit" do |id|
   memo = Memo.find(id.to_i)
   erb :edit, locals: {memo: memo}
+end
+
+put "/memos/:id" do
+  text = Memo.new(id: params[:id], text: params[:text])
+  text.update
+  redirect to "/memos"
 end

@@ -28,4 +28,13 @@ class RecordManager
       JSON.dump(arr, io)
     end
   end
+
+  def self.update(**args)
+    data = fetch_data
+    data.find{ |val| val["id"] == args[:id].to_i}["text"] = args[:text]
+
+    File.open(PATH, 'w') do |io|
+      JSON.dump(data, io)
+    end
+  end
 end
