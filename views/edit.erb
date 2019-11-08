@@ -1,8 +1,10 @@
 <link rel="stylesheet" type="text/css" href="/bootstrap.css">
 
-<h1>編集</h1>
-<form method="post"action="/memos/<%= memo.id %>">
-  <input type="hidden" name="_method" value="put" >
-  <textarea name="text"><%= memo.text %></textarea>
-  <input type="submit">
-</form>
+<div class="container">
+  <h1>メモスール</h1>
+  <form method="post"action="/memos/<%= memo.id %>">
+    <input type="hidden" name="_method" value="put" >
+    <textarea name="text"><%= memo.text %></textarea>
+    <input type="submit">
+  </form>
+</div>

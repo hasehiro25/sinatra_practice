@@ -1,8 +1,13 @@
 <link rel="stylesheet" type="text/css" href="/bootstrap.css">
 
-<h1>helloworld</h1>
-<ul>
-  <% memos.each do |memo| %>
-  <li><%= memo.text %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <h1>メモスール</h1>
+  <div class="justify-center">
+    <a class="btn btn-primary" href="memos/new" role="button">追加</a>
+  </div>
+  <ul>
+    <% memos.each do |memo| %>
+    <li><%= memo.text %></li>
+    <% end %>
+  </ul>
+</div>
