@@ -2,8 +2,11 @@
 <div class="container">
   <h1>メモスール</h1>
   <%= memo.text%>
+  <div>
+    <a class="btn btn-primary" href="<%= memo.id %>/edit" role="button"> 変更</a>
+  </div>
   <form action="<%= memo.id%>" method="post">
     <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="削除">
+    <input type="submit"  class="btn btn-primary" value="削除">
   </form>
 </div>
