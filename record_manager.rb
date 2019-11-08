@@ -3,23 +3,26 @@
 require "json"
 
 class RecordManager
-  PATH = "./data/memo_record.json"
+  attr_accessor :path
+  def initialize(path)
+    @path = path
+  end
 
-  def self.fetch_data
-    File.open(PATH) do |j|
+  def fetch_data
+    File.open(path) do |j|
       JSON.load(j)
     end
   end
 
-  def self.find(id)
+  def find(id)
     fetch_data.find{ |hash| hash["id"].to_i == id}
   end
 
-  def self.new_id
+  def new_id
     fetch_data.max_by{ |val| val["id"].to_i }["id"].to_i + 1
   end
 
-  def self.save(**args)
+  def save(**args)
     args[:id] = new_id if args[:id].nil?
     arr = fetch_data
     arr << args
@@ -29,19 +32,19 @@ class RecordManager
     end
   end
 
-  def self.update(**args)
+  def update(**args)
     data = fetch_data
     data.find{ |val| val["id"] == args[:id].to_i}["text"] = args[:text]
 
-    File.open(PATH, 'w') do |io|
+    File.open(path, 'w') do |io|
       JSON.dump(data, io)
     end
   end
 
-  def self.delete(id)
+  def delete(id)
     data = fetch_data.reject{ |val| val["id"] == id.to_i}
 
-    File.open(PATH, 'w') do |io|
+    File.open(path, 'w') do |io|
       JSON.dump(data, io)
     end
   end
