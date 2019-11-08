@@ -36,3 +36,8 @@ put "/memos/:id" do
   text.update
   redirect to "/memos"
 end
+
+delete "/memos/:id" do
+  Memo.delete(params["id"])
+  redirect to "/memos"
+end

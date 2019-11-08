@@ -37,4 +37,12 @@ class RecordManager
       JSON.dump(data, io)
     end
   end
+
+  def self.delete(id)
+    data = fetch_data.reject{ |val| val["id"] == id.to_i}
+
+    File.open(PATH, 'w') do |io|
+      JSON.dump(data, io)
+    end
+  end
 end
