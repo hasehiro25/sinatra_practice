@@ -34,7 +34,7 @@ end
 put "/memos/:id" do
   text = Memo.new(id: params[:id], text: params[:text])
   text.update
-  redirect to "/memos"
+  redirect to "/memos/#{text.id}"
 end
 
 delete "/memos/:id" do
