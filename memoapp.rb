@@ -23,7 +23,7 @@ end
 post "/memos" do
   text = Memo.new(text: params["text"])
   text.save
-  redirect to "/memos"
+  redirect to "/memos/#{text.id}"
 end
 
 get "/memos/:id/edit" do |id|

@@ -24,7 +24,8 @@ class Memo
   end
 
   def save
-    record_manager.save(id: self.id, text: self.text)
+    saved_record = record_manager.save(id: self.id, text: self.text)
+    self.id = saved_record[:id]
   end
 
   def update

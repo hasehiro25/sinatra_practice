@@ -31,6 +31,7 @@ class RecordManager
     data << args
 
     output_to_file(data)
+    args
   end
 
   def update(**args)
