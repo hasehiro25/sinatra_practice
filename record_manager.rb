@@ -24,29 +24,29 @@ class RecordManager
   end
 
   def save(**args)
-    args[:id] = new_id if args[:id].nil?
-    arr = fetch_data
-    arr << args
+    args[:id] = new_id
+    data = fetch_data
+    data << args
 
-    File.open(path, 'w') do |io|
-      JSON.dump(arr, io)
-    end
+    output_to_file(data)
   end
 
   def update(**args)
     data = fetch_data
     data.find { |val| val["id"] == args[:id].to_i }["text"] = args[:text]
 
-    File.open(path, 'w') do |io|
-      JSON.dump(data, io)
-    end
+    output_to_file(data)
   end
 
   def delete(id)
     data = fetch_data.reject{ |val| val["id"] == id.to_i}
-
-    File.open(path, 'w') do |io|
-      JSON.dump(data, io)
-    end
+    output_to_file(data)
   end
+
+  private
+    def output_to_file(data)
+      File.open(path, "w") do |io|
+        JSON.dump(data, io)
+      end
+    end
 end
