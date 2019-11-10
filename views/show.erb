@@ -1,7 +1,9 @@
 <link rel="stylesheet" type="text/css" href="/bootstrap.css">
 <div class="container">
   <h1>メモスール</h1>
-  <%= memo.text%>
+  <p>
+    <%= replace_to_br(memo.text)%>
+  </p>
   <div>
     <a class="btn btn-primary" href="<%= memo.id %>/edit" role="button"> 変更</a>
   </div>
