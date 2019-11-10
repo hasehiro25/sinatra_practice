@@ -13,26 +13,26 @@ class Memo
   end
 
   def self.all
-    RecordManager.new(PATH).fetch_data.map do |memo|
+    record_manager.fetch_data.map do |memo|
       Memo.new(id: memo["id"].to_i, text: memo["text"])
     end
   end
 
   def self.find(id)
-    record = RecordManager.new(PATH).find(id)
+    record = record_manager.find(id)
     Memo.new(id: record["id"], text: record["text"])
   end
 
   def save
-    RecordManager.new(PATH).save(id: self.id, text: self.text)
+    record_manager.save(id: self.id, text: self.text)
   end
 
   def update
-    RecordManager.new(PATH).update(id: self.id, text: self.text)
+    record_manager.update(id: self.id, text: self.text)
   end
 
   def self.delete(id)
-    RecordManager.new(PATH).delete(id)
+    record_manager.delete(id)
   end
 
   def title
@@ -40,4 +40,11 @@ class Memo
   end
 
   private
+    def self.record_manager
+      RecordManager.new(PATH)
+    end
+
+    def record_manager
+      @record_manager ||= Memo.record_manager
+    end
 end
