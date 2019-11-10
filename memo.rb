@@ -36,7 +36,7 @@ class Memo
   end
 
   def title
-    @text.split("\n").first
+    text.split("\n").first
   end
 
   private
