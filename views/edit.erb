@@ -4,7 +4,9 @@
   <h1>メモスール</h1>
   <form method="post"action="/memos/<%= memo.id %>">
     <input type="hidden" name="_method" value="put" >
-    <textarea name="text"><%= memo.text %></textarea>
-    <input type="submit">
+    <textarea name="text" cols="30" rows="10"><%= memo.text %></textarea>
+    <div class="mt-2 mb-2">
+      <input class="btn btn-primary" type="submit">
+    </div>
   </form>
 </div>
