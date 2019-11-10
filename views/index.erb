@@ -7,7 +7,8 @@
   </div>
   <ul>
     <% memos.each do |memo| %>
-    <li><%= memo.text %></li>
+    <li>
+    <%= link_to "memos/#{memo.id}", memo.title %></li>
     <% end %>
   </ul>
 </div>

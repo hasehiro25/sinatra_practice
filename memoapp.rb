@@ -41,3 +41,9 @@ delete "/memos/:id" do
   Memo.delete(params["id"])
   redirect to "/memos"
 end
+
+helpers do
+  def link_to(url, text)
+    %Q(<a href="#{url}">#{text}</a>)
+  end
+end
