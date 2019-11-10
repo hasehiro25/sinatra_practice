@@ -1,0 +1,14 @@
+.inline-header {
+  display: inline-block;
+}
+
+.btn, .inline-form {
+  display: inline-block;
+
+}
+
+.addmemo-btn {
+  position: relative;
+  bottom: 11px;
+  margin: 5px;
+}
