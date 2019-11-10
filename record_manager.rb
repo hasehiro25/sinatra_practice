@@ -10,6 +10,7 @@ class RecordManager
   end
 
   def fetch_data
+    return [] unless File.exist?(path)
     File.open(path) do |j|
       JSON.load(j)
     end
@@ -20,7 +21,8 @@ class RecordManager
   end
 
   def new_id
-    fetch_data.max_by{ |val| val["id"].to_i }["id"].to_i + 1
+    return 1 unless File.exist?(path)
+    max_id + 1
   end
 
   def save(**args)
@@ -48,5 +50,9 @@ class RecordManager
       File.open(path, "w") do |io|
         JSON.dump(data, io)
       end
+    end
+
+    def max_id
+      fetch_data.max_by { |val| val["id"].to_i }["id"].to_i
     end
 end
