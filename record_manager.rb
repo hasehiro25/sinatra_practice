@@ -36,8 +36,11 @@ class RecordManager
 
   def update(**args)
     data = fetch_data
-    data.find { |val| val["id"] == args[:id].to_i }["text"] = args[:text]
-
+    record = data.find { |val| val["id"] == args[:id].to_i }
+    args.delete(:id)
+    args.each do |key, val|
+      record[key.to_s] = val
+    end
     output_to_file(data)
   end
 
