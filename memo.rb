@@ -21,6 +21,8 @@ class Memo
   def self.find(id)
     record = record_manager.find(id)
     Memo.new(id: record["id"], text: record["text"])
+    rescue NoMethodError => e
+      raise Sinatra::NotFound
   end
 
   def save

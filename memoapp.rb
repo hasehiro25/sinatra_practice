@@ -42,6 +42,10 @@ delete "/memos/:id" do
   redirect to "/memos"
 end
 
+not_found do
+  "該当するページが見つかりませんでした！！"
+end
+
 helpers do
   def link_to(url, text)
     %Q(<a href="#{url}">#{text}</a>)
