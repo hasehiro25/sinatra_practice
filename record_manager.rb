@@ -3,8 +3,6 @@
 require "json"
 
 class RecordManager
-  attr_accessor :path
-
   def initialize(path)
     @path = path
   end
@@ -50,6 +48,8 @@ class RecordManager
   end
 
   private
+    attr_accessor :path
+
     def output_to_file(data)
       File.open(path, "w") do |io|
         JSON.dump(data, io)
