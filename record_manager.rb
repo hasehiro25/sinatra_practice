@@ -9,8 +9,9 @@ class RecordManager
 
   def fetch_data
     return [] unless File.exist?(path)
-    File.open(path) do |j|
-      JSON.load(j)
+    File.open(path) do |file|
+      file.flock(File::LOCK_EX)
+      JSON.load(file)
     end
   end
 
@@ -27,7 +28,6 @@ class RecordManager
     args[:id] = new_id
     data = fetch_data
     data << args
-
     output_to_file(data)
     args
   end
@@ -51,8 +51,9 @@ class RecordManager
     attr_accessor :path
 
     def output_to_file(data)
-      File.open(path, "w") do |io|
-        JSON.dump(data, io)
+      File.open(path, "w") do |file|
+        file.flock(File::LOCK_EX)
+        JSON.dump(data, file)
       end
     end
 
