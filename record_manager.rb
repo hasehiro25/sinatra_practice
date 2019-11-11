@@ -21,7 +21,7 @@ class RecordManager
   end
 
   def new_id
-    return 1 unless File.exist?(path)
+    return 1 if !File.exist?(path) || fetch_data.empty?
     max_id + 1
   end
 
