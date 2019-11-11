@@ -7,7 +7,7 @@
   <ul>
     <% memos.each do |memo| %>
     <li>
-    <%= link_to "memos/#{memo.id}", memo.title %></li>
+    <%= link_to "memos/#{memo.id}", show_blank_title(memo.title) %></li>
     <% end %>
   </ul>
 </div>

@@ -50,4 +50,9 @@ helpers do
   def replace_to_br(text)
     text.gsub(/(\r\n|\r|\n)/, "<br />")
   end
+
+  def show_blank_title(title)
+    return title unless title.nil? || title.strip.empty?
+    "(no title)"
+  end
 end
