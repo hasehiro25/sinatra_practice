@@ -8,7 +8,7 @@ enable :method_override
 
 get "/memos" do
   memos = Memo.all
-  erb :index, locals: {memos: memos}
+  erb :index, locals: { memos: memos }
 end
 
 get "/memos/new" do
@@ -28,7 +28,7 @@ end
 
 get "/memos/:id/edit" do |id|
   memo = Memo.find(id.to_i)
-  erb :edit, locals: {memo: memo}
+  erb :edit, locals: { memo: memo }
 end
 
 put "/memos/:id" do

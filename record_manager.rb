@@ -17,7 +17,7 @@ class RecordManager
   end
 
   def find(id)
-    fetch_data.find{ |hash| hash["id"].to_i == id}
+    fetch_data.find { |hash| hash["id"].to_i == id }
   end
 
   def new_id
@@ -45,7 +45,7 @@ class RecordManager
   end
 
   def delete(id)
-    data = fetch_data.reject{ |val| val["id"] == id.to_i}
+    data = fetch_data.reject { |val| val["id"] == id.to_i }
     output_to_file(data)
   end
 
