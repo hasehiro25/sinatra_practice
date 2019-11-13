@@ -31,7 +31,7 @@ get "/memos/:id/edit" do |id|
   erb :edit, locals: { memo: memo }
 end
 
-put "/memos/:id" do
+patch "/memos/:id" do
   text = Memo.new(id: params[:id], text: params[:text])
   text.update
   redirect to "/memos/#{text.id}"

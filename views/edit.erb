@@ -4,7 +4,7 @@
   <a href="/memos">TOP</a>
   <h1>メモスール</h1>
   <form method="post"action="/memos/<%= memo.id %>">
-    <input type="hidden" name="_method" value="put" >
+    <input type="hidden" name="_method" value="patch" >
     <textarea name="text" cols="30" rows="10"><%= memo.text %></textarea>
     <div class="mt-2 mb-2">
       <input class="btn btn-primary" type="submit">
