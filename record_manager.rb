@@ -16,7 +16,7 @@ class RecordManager
   end
 
   def find(id)
-    fetch_data.find { |hash| hash["id"].to_i == id }
+    fetch_data.find { |hash| hash["id"] == id }
   end
 
   def save(**args)

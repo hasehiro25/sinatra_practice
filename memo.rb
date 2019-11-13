@@ -14,7 +14,7 @@ class Memo
 
   def self.all
     record_manager.fetch_data.map do |memo|
-      Memo.new(id: memo["id"].to_i, text: memo["text"])
+      Memo.new(id: memo["id"], text: memo["text"])
     end
   end
 
