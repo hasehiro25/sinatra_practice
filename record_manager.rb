@@ -25,7 +25,7 @@ class RecordManager
   end
 
   def update(**args)
-    update_file(args)
+    output_updates(args)
   end
 
   def delete(id)
@@ -58,7 +58,7 @@ class RecordManager
       end
     end
 
-    def update_file(args)
+    def output_updates(args)
       overwrite_file do |data|
         record = data.find { |val| val["id"] == args[:id].to_i }
         args.delete(:id)
