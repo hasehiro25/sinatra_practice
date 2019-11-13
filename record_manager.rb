@@ -20,12 +20,21 @@ class RecordManager
   end
 
   def save(**args)
-    output_to_file_with_id(args)
+    overwrite_file do |data|
+      args[:id] = new_id(data)
+      data << args
+    end
     args
   end
 
   def update(**args)
-    output_updates(args)
+    overwrite_file do |data|
+      record = data.find { |val| val["id"] == args[:id].to_i }
+      args.delete(:id)
+      args.each do |key, val|
+        record[key.to_s] = val
+      end
+    end
   end
 
   def delete(id)
@@ -48,24 +57,6 @@ class RecordManager
 
     def create_array
       File.write(path, "[]")
-    end
-
-
-    def output_to_file_with_id(args)
-      overwrite_file do |data|
-        args[:id] = new_id(data)
-        data << args
-      end
-    end
-
-    def output_updates(args)
-      overwrite_file do |data|
-        record = data.find { |val| val["id"] == args[:id].to_i }
-        args.delete(:id)
-        args.each do |key, val|
-          record[key.to_s] = val
-        end
-      end
     end
 
     def overwrite_file
