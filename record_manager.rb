@@ -29,7 +29,7 @@ class RecordManager
   end
 
   def delete(id)
-    overwrite_file { |data| p data.delete_if { |val| val["id"] == id.to_i } }
+    overwrite_file { |data| data.delete_if { |val| val["id"] == id.to_i } }
   end
 
   private
