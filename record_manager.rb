@@ -8,7 +8,7 @@ class RecordManager
   end
 
   def fetch_data
-    return [] unless File.exist?(path)
+    check_file
     File.open(path) do |file|
       file.flock(File::LOCK_EX)
       JSON.load(file)
@@ -35,6 +35,22 @@ class RecordManager
   private
     attr_accessor :path
 
+    def check_file
+      create_file unless File.exist?(path)
+      create_array if File.zero?(path)
+    end
+
+    def create_file
+      File.open(path, "w") do |file|
+        file.write("[]")
+      end
+    end
+
+    def create_array
+      File.write(path, "[]")
+    end
+
+
     def output_to_file_with_id(args)
       overwrite_file do |data|
         args[:id] = new_id(data)
@@ -53,6 +69,7 @@ class RecordManager
     end
 
     def overwrite_file
+      check_file
       File.open(path, "r+") do |file|
         file.flock(File::LOCK_EX)
         data = JSON.load(file)
@@ -64,7 +81,7 @@ class RecordManager
     end
 
     def new_id(data)
-      return 1 if !File.exist?(path) || data.empty?
+      return 1 if data.empty?
       max_id(data) + 1
     end
 
