@@ -19,11 +19,6 @@ class RecordManager
     fetch_data.find { |hash| hash["id"].to_i == id }
   end
 
-  def new_id(data)
-    return 1 if !File.exist?(path) || data.empty?
-    max_id(data) + 1
-  end
-
   def save(**args)
     output_to_file_with_id(args)
     args
@@ -34,39 +29,44 @@ class RecordManager
   end
 
   def delete(id)
-    data = fetch_data.reject { |val| val["id"] == id.to_i }
-    output_to_file(data)
+    overwrite_file { |data| p data.delete_if { |val| val["id"] == id.to_i } }
   end
 
   private
     attr_accessor :path
 
     def output_to_file_with_id(args)
-      File.open(path, "r+") do |file|
-        file.flock(File::LOCK_EX)
-        data = JSON.load(file)
+      overwrite_file do |data|
         args[:id] = new_id(data)
         data << args
-        file.seek(0)
-        JSON.dump(data, file)
       end
     end
 
     def update_file(args)
-      File.open(path, "r+") do |file|
-        file.flock(File::LOCK_EX)
-        data = JSON.load(file)
+      overwrite_file do |data|
         record = data.find { |val| val["id"] == args[:id].to_i }
         args.delete(:id)
-        file.seek(0)
         args.each do |key, val|
           record[key.to_s] = val
         end
+      end
+    end
+
+    def overwrite_file
+      File.open(path, "r+") do |file|
+        file.flock(File::LOCK_EX)
+        data = JSON.load(file)
+        yield(data)
+        file.seek(0)
+        file.truncate(0)
         JSON.dump(data, file)
       end
     end
 
-    
+    def new_id(data)
+      return 1 if !File.exist?(path) || data.empty?
+      max_id(data) + 1
+    end
 
     def max_id(data)
       data.max_by { |val| val["id"].to_i }["id"].to_i
