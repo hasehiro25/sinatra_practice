@@ -4,8 +4,6 @@ require "sinatra"
 require "sinatra/reloader"
 require "./memo"
 
-enable :method_override
-
 get "/memos" do
   memos = Memo.all
   erb :index, locals: { memos: memos }
