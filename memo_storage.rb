@@ -6,7 +6,7 @@ class MemoStorage
   DATABASE_NAME = "memoapp"
   TABLE = "memo"
 
-  attr_reader :conn, :table
+  attr_reader :conn
   def initialize
     @conn = PG.connect(dbname: DATABASE_NAME)
   end
