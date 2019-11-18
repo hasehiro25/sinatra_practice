@@ -1,0 +1,14 @@
+<link rel="stylesheet" type="text/css" href="/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/styles.css">
+<div class="container">
+  <a href="/memos">TOP</a>
+  <h1>メモスール</h1>
+  <div class="mt-3 mb-3">
+    <%= replace_to_br(memo.text)%>
+  </div>
+    <a class="btn btn-primary" href="<%= memo.id %>/edit" role="button"> 変更</a>
+  <form class="inline-form" action="<%= memo.id%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit"  class="btn btn-primary" value="削除">
+  </form>
+</div>
